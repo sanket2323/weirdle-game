@@ -1,0 +1,4 @@
+*.py
+gameplay/
+support.py
+words.txt
