@@ -1,10 +1,7 @@
 # DO NOT modify or add any import statements
-from typing import Any
-
 from support import *
 
 ALL_WORDS = load_words("words.txt")
-
 
 # Name: Sanket Mane
 # Student Number: 50040467
@@ -33,31 +30,35 @@ def get_max_guesses() -> int:
                 break
     return number_of_guesses
 
-#task 4
-def create_board(max_guesses: int) -> list[tuple[str,str]]:
-
-    #create empty row value
+# task 4
+def create_board(max_guesses: int) -> list[tuple[str, str]]:
+    # create empty row value
     empty_row_value = EMPTY * 6
 
-    #convert row into tuple
+    # convert row into tuple
     row_tuple = []
     for j in range(2):
         row_tuple.append(empty_row_value)
     row_tuple = tuple(row_tuple)
 
-    #create a board list by appending tuple rows
-    game_board= []
+    # create a board list by appending tuple rows
+    game_board = []
     for i in range(max_guesses):
         game_board.append(row_tuple)
     return game_board
 
-#task 5
-def display_board(board: list[tuple[str,str]]) -> None:
+# task 5
+def display_board(board: list[tuple[str, str]]) -> None:
     print("-----------------------")
     for i in range(len(board)):
         print(f"Guess {i + 1}:  {board[i][0]}")
         print(f"Feedback: {board[i][1]}")
         print("-----------------------")
+
+# task 6
+def generate_secret_word() -> str:
+    index = randint(0, len(ALL_WORDS) - 1)
+    return ALL_WORDS[index]
 
 
 def main() -> None:
