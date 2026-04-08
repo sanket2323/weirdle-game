@@ -1,4 +1,6 @@
 # DO NOT modify or add any import statements
+from typing import Any
+
 from support import *
 
 ALL_WORDS = load_words("words.txt")
@@ -31,8 +33,27 @@ def get_max_guesses() -> int:
                 break
     return number_of_guesses
 
+#task 4
+def create_board(max_guesses: int) -> list[tuple[str,str]]:
+
+    #create empty row value
+    empty_row_value = EMPTY * 6
+
+    #convert row into tuple
+    row_tuple = []
+    for j in range(2):
+        row_tuple.append(empty_row_value)
+    row_tuple = tuple(row_tuple)
+
+    #create a board list by appending tuple rows
+    game_board= []
+    for i in range(max_guesses):
+        game_board.append(row_tuple)
+    return game_board
+
 def main() -> None:
     pass
+
 
 if __name__ == "__main__":
     main()
