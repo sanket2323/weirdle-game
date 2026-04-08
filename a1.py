@@ -51,6 +51,15 @@ def create_board(max_guesses: int) -> list[tuple[str,str]]:
         game_board.append(row_tuple)
     return game_board
 
+#task 5
+def display_board(board: list[tuple[str,str]]) -> None:
+    print("-----------------------")
+    for i in range(len(board)):
+        print(f"Guess {i + 1}:  {board[i][0]}")
+        print(f"Feedback: {board[i][1]}")
+        print("-----------------------")
+
+
 def main() -> None:
     pass
 
