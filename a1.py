@@ -3,6 +3,7 @@ from support import *
 
 ALL_WORDS = load_words("words.txt")
 
+
 # Name: Sanket Mane
 # Student Number: 50040467
 # Favorite Word: 
@@ -13,22 +14,24 @@ ALL_WORDS = load_words("words.txt")
 def num_hours() -> float:
     return 3.14
 
+
 # task 2
 def has_won(guess: str, target: str) -> bool:
     if guess == target:
         return True
     return False
 
+
 # task 3
 def get_max_guesses() -> int:
     while True:
-        number_of_guesses = input(
-            "\nPlease enter the number of guesses you require to guess the secret word. Your input must be a number between 5 and 9: ")
+        number_of_guesses = input(GET_NUM_GUESSES_MESSAGE)
         if number_of_guesses.isdigit():
             number_of_guesses = int(number_of_guesses)
             if number_of_guesses <= 9 and number_of_guesses >= 5:
                 break
     return number_of_guesses
+
 
 # task 4
 def create_board(max_guesses: int) -> list[tuple[str, str]]:
@@ -47,18 +50,46 @@ def create_board(max_guesses: int) -> list[tuple[str, str]]:
         game_board.append(row_tuple)
     return game_board
 
+
 # task 5
 def display_board(board: list[tuple[str, str]]) -> None:
-    print("-----------------------")
+    print(SEP)
     for i in range(len(board)):
         print(f"Guess {i + 1}:  {board[i][0]}")
         print(f"Feedback: {board[i][1]}")
-        print("-----------------------")
+        print(SEP)
+
 
 # task 6
 def generate_secret_word() -> str:
     index = randint(0, len(ALL_WORDS) - 1)
     return ALL_WORDS[index]
+
+
+# task 7
+def validate_input(command: str) -> bool:
+    length_of_command = len(command)
+
+    if length_of_command == 1:
+        if command.isalpha():
+            return True
+        else:
+            print(INVALID_FORMAT_MESSAGE)
+            return False
+
+    if length_of_command != 6 or not command.isalpha():
+        print(INVALID_FORMAT_MESSAGE)
+        return False
+
+    if not command.islower() or len(set(command)) != length_of_command:
+        print(INVALID_CHARACTERS_MESSAGE)
+        return False
+
+    if not command in ALL_WORDS:
+        print(INVALID_GUESS_MESSAGE)
+        return False
+
+    return True
 
 
 def main() -> None:
