@@ -71,7 +71,7 @@ def validate_input(command: str) -> bool:
     length_of_command = len(command)
 
     if length_of_command == 1:
-        if command.isalpha():
+        if command.isalpha() and command in HELP_COMMAND:
             return True
         else:
             print(INVALID_FORMAT_MESSAGE)
@@ -101,6 +101,11 @@ def get_command() -> str:
             break
 
     return command
+
+
+# #task 9
+# def get_feedback(guess: str, target: str) -> str:
+#
 
 
 def main() -> None:
