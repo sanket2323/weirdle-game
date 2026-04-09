@@ -103,7 +103,7 @@ def get_command() -> str:
     return command
 
 
-#task 9
+# task 9
 def get_feedback(guess: str, target: str) -> str:
     feedback = ""
     for i in range(6):
@@ -115,11 +115,26 @@ def get_feedback(guess: str, target: str) -> str:
             feedback += BLACK
     return feedback
 
+
 # task 10
-def update_board(board: list[tuple], guess_num:int, guess: str, target: str) -> None:
+def update_board(board: list[tuple], guess_num: int, guess: str, target: str) -> None:
     get_feedback_from_fun = get_feedback(guess, target)
     board[guess_num - 1] = (guess, get_feedback_from_fun)
     return None
+
+
+# task 11
+def display_keyboard(keyboard: dict[str, str]) -> None:
+    print("Keyboard:")
+    print(SEP)
+    items = list(keyboard.items())
+    for i in range(0, len(items), 3):
+        chunks = items[i:i + 3]
+        for key, value in chunks:
+            print(f"{key}: {value}", end="    ")
+        print()
+    print(SEP)
+
 
 def main() -> None:
     pass
