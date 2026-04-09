@@ -103,7 +103,7 @@ def get_command() -> str:
     return command
 
 
-# #task 9
+#task 9
 def get_feedback(guess: str, target: str) -> str:
     feedback = ""
     for i in range(6):
