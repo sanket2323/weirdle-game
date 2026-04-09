@@ -115,6 +115,11 @@ def get_feedback(guess: str, target: str) -> str:
             feedback += BLACK
     return feedback
 
+# task 10
+def update_board(board: list[tuple], guess_num:int, guess: str, target: str) -> None:
+    get_feedback_from_fun = get_feedback(guess, target)
+    board[guess_num - 1] = (guess, get_feedback_from_fun)
+    return None
 
 def main() -> None:
     pass
