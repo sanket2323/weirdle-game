@@ -135,6 +135,42 @@ def display_keyboard(keyboard: dict[str, str]) -> None:
         print()
     print(SEP)
 
+#task 12
+def update_keyboard(board: list[tuple], keyboard: dict[str, str], guess_num: int) -> None:
+    guess_word = board[guess_num - 1][0]
+    feedback_word = board[guess_num - 1][1]
+
+    for i in range(len(guess_word)):
+        letter = guess_word[i]
+        status = feedback_word[i]
+
+        if keyboard[letter] == "G":
+            continue
+
+        elif status == "G":
+            if keyboard[letter] != "G":
+                keyboard[letter] = "G"
+
+        elif status == "Y":
+            if keyboard[letter] != "G":
+                keyboard[letter] = "Y"
+
+        else:
+            if keyboard[letter] != "G":
+                keyboard[letter] = "B"
+
+
+#
+# #task 13
+# def play_game() -> None:
+#     print(WELCOME_MESSAGE)
+#     sec_word = generate_secret_word()
+#     board = create_board(get_max_guesses())
+#     keyboard = create_keyboard()
+#
+#     print("Play State")
+#     command = get_command()
+#     validate_input(command)
 
 def main() -> None:
     pass
