@@ -6,7 +6,7 @@ ALL_WORDS = load_words("words.txt")
 
 # Name: Sanket Mane
 # Student Number: 50040467
-# Favorite Word: 
+# Favorite Word: pencil
 # -----------------------------------------------------------------------------
 
 # Define your functions here
@@ -68,29 +68,28 @@ def generate_secret_word() -> str:
 
 # task 7
 def validate_input(command: str) -> bool:
-    length_of_command = len(command)
+    # valid single-letter special commands
+    if command == "h" or command == "H":
+        return True
+    if command == "a" or command == "A":
+        return True
+    if command == "q" or command == "Q":
+        return True
 
-    if length_of_command == 1:
-        if command.isalpha() or command in HELP_COMMAND:
-            return True
-        else:
-            print(INVALID_FORMAT_MESSAGE)
-            return False
-
-    if length_of_command != 6 or not command.isalpha():
+    # guess must be exactly 6 alphabetic characters
+    if len(command) != 6 or not command.isalpha():
         print(INVALID_FORMAT_MESSAGE)
         return False
 
-    if not command.islower() or len(set(command)) != length_of_command:
+    # guess must be lowercase and all letters unique
+    if not command.islower() or len(set(command)) != 6:
         print(INVALID_CHARACTERS_MESSAGE)
         return False
 
-    if not command in ALL_WORDS:
+    if command not in ALL_WORDS:
         print(INVALID_GUESS_MESSAGE)
         return False
-
     return True
-
 
 # task 8
 def get_command() -> str:
@@ -135,7 +134,8 @@ def display_keyboard(keyboard: dict[str, str]) -> None:
         print()
     print(SEP)
 
-#task 12
+
+# task 12
 def update_keyboard(board: list[tuple], keyboard: dict[str, str], guess_num: int) -> None:
     guess_word = board[guess_num - 1][0]
     feedback_word = board[guess_num - 1][1]
@@ -160,20 +160,54 @@ def update_keyboard(board: list[tuple], keyboard: dict[str, str], guess_num: int
                 keyboard[letter] = "B"
 
 
-#
-# #task 13
-# def play_game() -> None:
-#     print(WELCOME_MESSAGE)
-#     sec_word = generate_secret_word()
-#     board = create_board(get_max_guesses())
-#     keyboard = create_keyboard()
-#
-#     print("Play State")
-#     command = get_command()
-#     validate_input(command)
+# task 13
+def play_game() -> None:
+    print(WELCOME_MESSAGE)
+    sec_word = generate_secret_word()
+    max_guesses = get_max_guesses()
 
+    # print(f"{max_guesses}")
+    board = create_board(max_guesses)
+    display_board(board)
+    keyboard = create_keyboard()
+
+    current_guess_number = 1
+
+    while current_guess_number <= max_guesses:
+        command = get_command()
+
+        if command in HELP_COMMAND:
+            print(HELP_MESSAGE)
+
+        elif command == "a" or command == "A":
+            display_keyboard(keyboard)
+
+        elif command == "q" or command == "Q":
+            break
+
+        else:
+            update_board(board, current_guess_number, command, sec_word)
+            update_keyboard(board, keyboard, current_guess_number)
+            display_board(board)
+
+            if has_won(command, sec_word):
+                print(WIN_MESSAGE)
+                break
+            current_guess_number += 1
+        # print(current_guess_number)
+
+    if current_guess_number > max_guesses:
+        print(LOST_MESSAGE + f" The word was: {sec_word}")
+
+
+# task 14
 def main() -> None:
-    pass
+    while True:
+        play_game()
+        retry_game_or_not = input(RETRY_MESSAGE)
+        if retry_game_or_not.lower() != "y":
+            break
+    return None
 
 
 if __name__ == "__main__":
