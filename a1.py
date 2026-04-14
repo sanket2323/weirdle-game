@@ -4,7 +4,7 @@ from support import *
 ALL_WORDS = load_words("words.txt")
 
 
-# Name: Sanket Mane
+# Name: Sanket Tukaram Mane
 # Student Number: 50040467
 # Favorite Word: pencil
 # -----------------------------------------------------------------------------
