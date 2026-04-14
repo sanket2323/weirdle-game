@@ -94,10 +94,8 @@ def validate_input(command: str) -> bool:
 def get_command() -> str:
     while True:
         command = input(ENTER_COMMAND_MESSAGE)
-
         if validate_input(command):
             break
-
     return command
 
 
