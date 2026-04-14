@@ -69,11 +69,9 @@ def generate_secret_word() -> str:
 # task 7
 def validate_input(command: str) -> bool:
     # valid single-letter special commands
-    if command == "h" or command == "H":
-        return True
-    if command == "a" or command == "A":
-        return True
-    if command == "q" or command == "Q":
+    valid_list = ["h","H","a","A","q","Q"]
+
+    if command in valid_list:
         return True
 
     # guess must be exactly 6 alphabetic characters
@@ -90,6 +88,7 @@ def validate_input(command: str) -> bool:
         print(INVALID_GUESS_MESSAGE)
         return False
     return True
+
 
 # task 8
 def get_command() -> str:
@@ -158,6 +157,8 @@ def update_keyboard(board: list[tuple], keyboard: dict[str, str], guess_num: int
         else:
             if keyboard[letter] != "G":
                 keyboard[letter] = "B"
+
+    return None
 
 
 # task 13
