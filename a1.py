@@ -59,7 +59,7 @@ def create_board(max_guesses: int) -> list[tuple[str, str]]:
         max_guesses: Number of guesses allowed
 
     Returns:
-    A list of tuples representing the game board
+    (list of tuple) : A list of tuples representing the game board
     """
     # create empty row value
     empty_row_value = EMPTY * 6
@@ -99,7 +99,7 @@ def generate_secret_word() -> str:
     """
     Select a random word from the list of words
     Returns:
-    A random word chosen from list of words
+    (str) : A random word chosen from list of words
     """
     index = randint(0, len(ALL_WORDS) - 1)
     return ALL_WORDS[index]
@@ -113,7 +113,7 @@ def validate_input(command: str) -> bool:
         command: The user input
 
     Returns:
-    True if command is valid, otherwise False
+    (boolean) : True if command is valid, otherwise False
     """
     # valid single-letter special commands
 
@@ -142,7 +142,7 @@ def get_command() -> str:
     """
     Get a command from the user
     Returns:
-    A valid command
+    (str) : A valid command
     """
     while True:
         command = input(ENTER_COMMAND_MESSAGE)
@@ -160,7 +160,7 @@ def get_feedback(guess: str, target: str) -> str:
         target: The secret word
 
     Returns:
-    A string representing feedback.
+    (str) : A string representing feedback.
     """
     feedback = ""
     for i in range(6):
@@ -204,6 +204,7 @@ def display_keyboard(keyboard: dict[str, str]) -> None:
     print("Keyboard:")
     print(SEP)
     items = list(keyboard.items())
+    # print 3 key-value pairs per row
     for i in range(0, len(items), 3):
         chunks = items[i:i + 3]
         for key, value in chunks:
@@ -227,6 +228,7 @@ def update_keyboard(board: list[tuple], keyboard: dict[str, str], guess_num: int
     guess_word = board[guess_num - 1][0]
     feedback_word = board[guess_num - 1][1]
 
+    # update each letter based on feedback
     for i in range(len(guess_word)):
         letter = guess_word[i]
         status = feedback_word[i]
@@ -257,10 +259,13 @@ def play_game() -> None:
     None
     """
     print(WELCOME_MESSAGE)
-    sec_word = generate_secret_word()
+
+    # setup phase
+
+    secret_word = generate_secret_word()
     max_guesses = get_max_guesses()
 
-    # print(f"{max_guesses}")
+    # initialize board and keyboard
     board = create_board(max_guesses)
     display_board(board)
     keyboard = create_keyboard()
@@ -270,6 +275,7 @@ def play_game() -> None:
     while current_guess_number <= max_guesses:
         command = get_command()
 
+        # process special commands
         if command in HELP_COMMAND:
             print(HELP_MESSAGE)
 
@@ -280,18 +286,19 @@ def play_game() -> None:
             break
 
         else:
-            update_board(board, current_guess_number, command, sec_word)
+            update_board(board, current_guess_number, command, secret_word)
             update_keyboard(board, keyboard, current_guess_number)
             display_board(board)
 
-            if has_won(command, sec_word):
+            if has_won(command, secret_word):
                 print(WIN_MESSAGE)
                 break
             current_guess_number += 1
-        # print(current_guess_number)
 
     if current_guess_number > max_guesses:
-        print(LOST_MESSAGE + f" The word was: {sec_word}")
+        print(LOST_MESSAGE + f" The word was: {secret_word}")
+
+    return None
 
 
 # task 14
