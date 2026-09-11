@@ -19,6 +19,9 @@ def num_hours() -> float:
     """
     return 4.14
 
+def aqeel() -> float:
+    return 2
+
 
 # task 2
 def has_won(guess: str, target: str) -> bool:
