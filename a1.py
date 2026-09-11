@@ -21,6 +21,7 @@ def num_hours() -> float:
 
 def aqeel() -> float:
     return 2
+\\\
 
 
 # task 2
